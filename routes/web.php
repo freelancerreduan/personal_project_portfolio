@@ -7,15 +7,23 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('users.dashboard');
-    })->name('dashboard');
+// Admin route
+Route::middleware(['auth', 'admin'])->group( function (){
+    Route::get('/admin/dashboard', function (){
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 });
+
+
+// User Route
+Route::middleware(['auth','user'])->group( function (){
+    Route::get('/user/dashboard', function (){
+        return view('users.dashboard');
+    })->name('user.dashboard');
+});
+
+
+
 
 
 Route::middleware('auth')->group(function () {

@@ -113,7 +113,11 @@
         <h5 class="mb-4">👤 User Panel</h5>
 
         <a class="active" onclick="showSection('dashboard',this)">
-            <i class="bi bi-grid me-2"></i> Dashboard
+            @if(auth()->user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}"><i class="bi bi-grid me-2"></i> Dashboard</a>
+            @else
+                <a href="{{ route('user.dashboard') }}"><i class="bi bi-grid me-2"></i> Dashboard</a>
+            @endif
         </a>
 
         <a onclick="showSection('myProjects',this)">
